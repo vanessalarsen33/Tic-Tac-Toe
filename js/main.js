@@ -20,10 +20,11 @@
 
 /*----- constants -----*/
 const colorLookup = {
-    '1': 'pink',
-    '-1': 'orange',
-    'null': 'transparent',
+    '1': 'X',
+    '-1': 'O',
+    'null': null,
 };
+
 /*----- app's state (variables) -----*/
 let board;      // array of column array with 1, -1 or null
 let turn;        // 1 or -1
@@ -53,17 +54,30 @@ function render() {
 
 function renderBoard() {
     board.forEach(function(cell, cellIdx) {
-        cellEls[cellIdx].style.backgroundColor = colorLookup[cell];
+        cellEls[cellIdx].innerHTML = colorLookup[cell];
+        // const img = document.createElement("img");
+        // img.src = "js/images/X.png"
+        // // cellEls[cellIdx].style.backgroundColor = colorLookup[cell];
+        // if (cell === 1) {
+        //     cellEls[cellIdx].appendChild(img);
+        // } else if (cell === -1) {
+        //     cellEls[cellIdx].appendChild(img);
+        // };
     });
 };
 
 function handleClick(evt) {
+    const target =  evt.target;
     const cellIdx = cellEls.indexOf(evt.target);
     const cell = board[cellIdx]
-    console.log(cell);
+    console.log(target);
     if (cell !== null) {return};
     board[cellIdx] = turn;
     turn *= -1;
+
+    // const img = document.createElement("img");
+    // img.src = "js/images/X.png"
+    // target.appendChild(img);
 
     render();
 };
